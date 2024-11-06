@@ -1,0 +1,48 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class BankAccount // Type of object (class)
+{
+  public: // Access specifier: Everything under public can be accessed outside of the class
+    string name; // A member variable
+    int balance;
+    
+    void withdraw(int amount)
+    {
+        balance = balance - amount;
+    }
+    
+    void print()
+    {
+        cout << name << " has " << balance << " dollars." << endl;
+    }
+};
+
+int main()
+{
+    BankAccount account1; //Creates a Bank account object (an instant in Bank Account)
+    account1.name = "Patrick"; //Dot Operator helps assign it to that bank account object
+    account1.balance = 3000;
+    
+    cout << account1.name << " has " << account1.balance << " dollars." << endl; // displays account 1 infor
+    
+    BankAccount account2; //Another instance of Bank Account Class
+    account2.name = "John";
+    account2.balance = 1000;
+    
+    cout << account2.name << " has " << account2.balance << " dollars." << endl;
+    account2.withdraw(100); //Withdraw member function
+    cout << account2.name << " now has " << account2.balance << " dollars." << endl;
+    
+    cout << endl;
+    
+    //You can now use the print member funciton in order to print
+    //Saves headache of typing out the same line repeating
+    account2.print();
+    account2.withdraw(100);
+    account2.print();
+
+    return 0;
+}
