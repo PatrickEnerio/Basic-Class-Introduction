@@ -1,0 +1,80 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Employee
+{
+    private: // Access Specifier that disallows the member funcitons or variables
+             // To be accessed outside of the member class
+        double salary;
+        
+        //This is a private member funciton
+            //So, this can only be accessed within the class itself, not outside of it 
+            double calcBonus()
+            {
+                return salary * 0.10;
+            }
+            //You make member functions private based on the phrase: Information hiding
+            //You use it so that the outside world can't interact with what shouldn't be 
+            //used by the users directly
+    
+    public: // Access Specifier that allows the member funcitons and variables
+            // To be used outside of the class
+        string name;
+        
+        //getter function
+        double getSalary() // This member function will return the salary that's stored
+                           // inside each instance that this object is called
+        {
+            return salary; // Able to Access the private member variable because it's apart of the class
+        }
+        
+        //setter function
+        void setSalary(double potentialSalary) // Set the salary for each instance that an 
+                                               // that an object is called
+        {
+            //Input validation for salary
+            if(potentialSalary < 0)
+            {
+                salary = 0;
+            } 
+            else
+            {
+                salary = potentialSalary;
+            }
+        }
+        
+        //You can make a public member function that's able to access the other
+        //private member functions that you're trying to "hide"
+        void printBonus()
+        {
+            cout << name << " bonus: " << calcBonus() << endl;
+        }
+};
+
+int main()
+{
+    
+    Employee employee1;
+    employee1.name = "Craig"; // Since it's a public member variable, it can be accessed
+    cout << employee1.name << endl; // Same reasoning for output
+    
+    //employee1.salary, = 50000; This is registered as a compiler error
+    //We aren't able to access the private member outside of the class
+    
+    //The getters and setters are part of the public access specifier 
+    //So they're able to access the private member variables
+    //You'll always see some variation of getters and setters apart of private and public member variable
+    employee1.setSalary(50000);
+    cout << "Salary: " << employee1.getSalary() << endl;
+    
+    //employee1.calcBonus(); This will produce an error in the code because calcBonus
+    //is a private member function
+    
+    //This is able to be used because you're accessing the private member function
+    //through a public member function
+    employee1.printBonus();
+
+    return 0;
+}
