@@ -1,0 +1,57 @@
+#include <iostream>
+
+using namespace std;
+
+class Rectangle
+{
+  private:
+    double length;
+    double width;
+    
+    //Having a private member function just acts the same way that a private member variable does
+    double area()
+    {
+        return length * width;
+    }
+    
+  public:
+    void setDimensions(double l, double w)
+    {
+        length = l;
+        width = w;
+    }
+    
+    // Function prototype
+    // Since it's under public, that means that it's accessible 
+    // Outside of the the class
+    double perimeter(); 
+    //We can define this function outside of the class (acts as a normal prototype)
+    
+    void getArea()
+    {
+        cout << "Area: " << area() << endl;
+    }
+    
+};
+
+//The double colon is like an identifier to the memeber function that you're trying
+// To access within the class itself
+double Rectangle::perimeter()
+{
+    return 2 * (length + width); // Calculates the perimeter from the given parameters
+}
+
+int main()
+{
+    Rectangle rectangle1; //Declares an object from the class
+    
+    rectangle1.setDimensions(10, 20); //Uses the setter function to "set" the paramteres of length and width
+    cout << "Perimeter: " << rectangle1.perimeter() << endl; //Calls the public member prototype that then accesses the function
+    
+    //rectangle1.area(); will compile an error because you're trying to access a private member function
+    //You'd need to have a public member function that calls that private member function in order to utilize it
+    
+    rectangle1.getArea(); //This works because you're accessing a public member funciton that is then accessible
+                          //To access the private member function
+    return 0;
+}
